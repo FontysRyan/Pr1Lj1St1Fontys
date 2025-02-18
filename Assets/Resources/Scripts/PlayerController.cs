@@ -24,13 +24,12 @@ public class PlayerController : MonoBehaviour
     public void Move(float moveInput)
     {
         Vector2 newPosition = rb.position + Vector2.up * moveInput * speed * Time.deltaTime;
-        // leg new position y uit in je werkwijze
-        newPosition.y = Mathf.Clamp(newPosition.y, -maxTransformPostionY, maxTransformPostionY);
+        newPosition.y = Mathf.Clamp(newPosition.y, -maxTransformPostionY, maxTransformPostionY); // kijkt ofdat je niet over de position gaat van maxTransformPostionY
         rb.MovePosition(newPosition);
     }
 
     public void ResetPosition()
     {
-        rb.position = startPosition;
+        rb.position = startPosition; // terugzetten naar de startpositie
     }
 }
