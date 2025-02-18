@@ -7,7 +7,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private BoxCollider2D boxCollider;
     [SerializeField] private string inputAxis = "Vertical"; // Input axis name
-    [SerializeField] private float speed = 5f;
+    [SerializeField] private float speed;
     private Vector3 startPosition;
 
     private void Start()
