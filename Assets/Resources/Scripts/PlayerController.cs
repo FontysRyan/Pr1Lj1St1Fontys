@@ -6,30 +6,45 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float maxTransformPostionY;
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private BoxCollider2D boxCollider;
-    [SerializeField] private string inputAxis = "Vertical"; // Input axis name
+    [SerializeField] private string inputAxis = "Vertical";
     [SerializeField] private float speed;
-    private Vector3 startPosition;
+    [SerializeField] private Vector3 startPosition;
+    [SerializeField] private float moveInput;
 
     private void Start()
     {
-        startPosition = transform.position;
+        InitializePosition();
     }
 
     private void Update()
     {
-        float moveInput = Input.GetAxis(inputAxis);
-        Move(moveInput);
+        ReadInput();
     }
 
-    public void Move(float moveInput)
+    private void FixedUpdate()
     {
-        Vector2 newPosition = rb.position + Vector2.up * moveInput * speed * Time.deltaTime;
-        newPosition.y = Mathf.Clamp(newPosition.y, -maxTransformPostionY, maxTransformPostionY); // kijkt ofdat je niet over de position gaat van maxTransformPostionY
+        ApplyMovement();
+    }
+
+    private void InitializePosition()
+    {
+        startPosition = transform.position;
+    }
+
+    private void ReadInput()
+    {
+        moveInput = Input.GetAxis(inputAxis);
+    }
+
+    private void ApplyMovement()
+    {
+        Vector2 newPosition = rb.position + Vector2.up * moveInput * speed * Time.fixedDeltaTime; // Calculate new position based on input and speed
+        newPosition.y = Mathf.Clamp(newPosition.y, -maxTransformPostionY, maxTransformPostionY); // dont go out of bounds
         rb.MovePosition(newPosition);
     }
 
     public void ResetPosition()
     {
-        rb.position = startPosition; // terugzetten naar de startpositie
+        rb.position = startPosition;
     }
 }
