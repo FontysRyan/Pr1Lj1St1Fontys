@@ -7,8 +7,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private BoxCollider2D boxCollider;
     [SerializeField] private string inputAxis = "Vertical";
-    [SerializeField] private float speed;
-    [SerializeField] private Vector3 startPosition;
+    [SerializeField] private float speed = 10f;
+    [SerializeField] private Vector3 startPosition = Vector3.zero;
     [SerializeField] private float moveInput;
 
     private void Start()

@@ -1,12 +1,13 @@
+using System;
 using UnityEngine;
 
 public class BallController : MonoBehaviour
 {
-    [SerializeField] private float speed;
-    [SerializeField] private float maxSpeed;
-    [SerializeField] private float minSpeed;
-    [SerializeField] private float speedIncreaseFactor;
-    [SerializeField] private Vector2 direction;
+    [SerializeField] private float speed = 10f;
+    [SerializeField] private float maxSpeed = 20f;
+    [SerializeField] private float minSpeed = 5f;
+    [SerializeField] private float speedIncreaseFactor = 0.5f;
+    [SerializeField] private Vector2 direction = Vector2.zero;
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private CircleCollider2D circleCollider;
 
@@ -14,6 +15,10 @@ public class BallController : MonoBehaviour
     {
         rb.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
         direction = GetRandomDirection();
+        if (speed > maxSpeed || speed < minSpeed) 
+        {
+            speed = Mathf.Clamp(speed, minSpeed, maxSpeed); // Clamp speed to min and max values
+        }
         ApplyVelocity();
     }
 
@@ -49,8 +54,8 @@ public class BallController : MonoBehaviour
 
     private void AdjustBounce()
     {
-        // prevent going straight up or down
-        direction.x += Random.Range(-0.2f, 0.2f);
+        // Prevent the ball from going straight up or down by slightly adjusting the x direction
+        direction.x += UnityEngine.Random.Range(-0.2f, 0.2f);
         direction = direction.normalized;
     }
 
@@ -65,9 +70,9 @@ public class BallController : MonoBehaviour
         do
         {
             // Generate a random direction vector within a unit circle and normalize it
-            randomDir = Random.insideUnitCircle.normalized;
+            randomDir = UnityEngine.Random.insideUnitCircle.normalized;
         }
-        while (Mathf.Abs(randomDir.x) < 0.4f || Mathf.Abs(randomDir.y) > 0.8f); // Avoid too vertical movement
+        while (Mathf.Abs(randomDir.x) < 0.5f || Mathf.Abs(randomDir.y) > 0.7f); // Avoid too vertical movement, the absolute value mathf.abs of both -3.5 and 3.5 is 3.5.
         return randomDir;
     }
 }
