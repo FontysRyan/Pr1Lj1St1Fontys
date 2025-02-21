@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class BallController : MonoBehaviour
@@ -15,11 +14,15 @@ public class BallController : MonoBehaviour
     {
         rb.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
         direction = GetRandomDirection();
-        if (speed > maxSpeed || speed < minSpeed) 
+        if (speed > maxSpeed || speed < minSpeed)
         {
             speed = Mathf.Clamp(speed, minSpeed, maxSpeed); // Clamp speed to min and max values
         }
-        ApplyVelocity();
+    }
+
+    void Update()
+    {
+
     }
 
     void FixedUpdate()
@@ -54,9 +57,18 @@ public class BallController : MonoBehaviour
 
     private void AdjustBounce()
     {
-        // Prevent the ball from going straight up or down by slightly adjusting the x direction
-        direction.x += UnityEngine.Random.Range(-0.2f, 0.2f);
-        direction = direction.normalized;
+        if (speed < 10)
+        {
+            direction.y += UnityEngine.Random.Range(-0.2f, 0.2f);
+            direction = direction.normalized;
+
+        }
+        else
+        {
+            direction.y += UnityEngine.Random.Range(-0.4f, 0.4f);
+            direction = direction.normalized;
+
+        }
     }
 
     private void IncreaseSpeed()
