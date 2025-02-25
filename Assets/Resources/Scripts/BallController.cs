@@ -42,6 +42,14 @@ public class BallController : MonoBehaviour
             AdjustBounce();
             IncreaseSpeed();
         }
+        else if (collision.gameObject.CompareTag("Goal Player"))
+        {
+            ResetBallPosition();
+        }
+        else if (collision.gameObject.CompareTag("Goal Bot"))
+        {
+            ResetBallPosition();
+        }
     }
 
     private void ApplyVelocity()
@@ -86,5 +94,12 @@ public class BallController : MonoBehaviour
         }
         while (Mathf.Abs(randomDir.x) < 0.5f || Mathf.Abs(randomDir.y) > 0.7f); // Avoid too vertical movement, the absolute value mathf.abs of both -3.5 and 3.5 is 3.5.
         return randomDir;
+    }
+
+    public void ResetBallPosition()
+    {
+        rb.position = Vector2.zero;
+        direction = GetRandomDirection();
+        speed = minSpeed;
     }
 }

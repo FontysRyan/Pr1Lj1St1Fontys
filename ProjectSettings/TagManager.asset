@@ -7,6 +7,8 @@ TagManager:
   - Paddle
   - Wall
   - Ball
+  - Goal Bot
+  - Goal Player
   layers:
   - Default
   - TransparentFX
