@@ -265,7 +265,7 @@ GameObject:
   - component: {fileID: 232518355}
   - component: {fileID: 232518354}
   m_Layer: 5
-  m_Name: Text (TMP) (3)
+  m_Name: Player Score
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -974,6 +974,7 @@ GameObject:
   - component: {fileID: 805373908}
   - component: {fileID: 805373907}
   - component: {fileID: 805373906}
+  - component: {fileID: 805373910}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -1068,6 +1069,22 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &805373910
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 805373905}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83522c0f96fbf634c82a472f92f2fc4f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxScore: 2
+  maxReceivedScore: 1
+  playerScoreText: {fileID: 232518354}
+  botScoreText: {fileID: 1849186715}
 --- !u!1 &1025023165 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 286918880791786062, guid: 1b9a3120e63ebab489a055f8d6def1d7, type: 3}
@@ -1366,7 +1383,7 @@ GameObject:
   - component: {fileID: 1514865081}
   - component: {fileID: 1514865080}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Player Name
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1502,7 +1519,7 @@ GameObject:
   - component: {fileID: 1557802571}
   - component: {fileID: 1557802570}
   m_Layer: 5
-  m_Name: Text (TMP) (1)
+  m_Name: Bot Name
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1772,7 +1789,7 @@ GameObject:
   - component: {fileID: 1849186716}
   - component: {fileID: 1849186715}
   m_Layer: 5
-  m_Name: Text (TMP) (2)
+  m_Name: Bot Score
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1908,7 +1925,7 @@ GameObject:
   - component: {fileID: 2100879725}
   - component: {fileID: 2100879724}
   m_Layer: 5
-  m_Name: Text (TMP) (4)
+  m_Name: Styling
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

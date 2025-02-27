@@ -1,5 +1,4 @@
 using UnityEngine;
-
 public class BallController : MonoBehaviour
 {
     [SerializeField] private float speed = 10f;
@@ -44,10 +43,12 @@ public class BallController : MonoBehaviour
         }
         else if (collision.gameObject.CompareTag("Goal Player"))
         {
+            ScoreSystem.Instance.AddScore(ScoreType.Bot, 1); 
             ResetBallPosition();
         }
         else if (collision.gameObject.CompareTag("Goal Bot"))
         {
+            ScoreSystem.Instance.AddScore(ScoreType.Player, 1); 
             ResetBallPosition();
         }
     }
@@ -67,7 +68,6 @@ public class BallController : MonoBehaviour
     {
         if (speed < 10)
         {
-            direction.y += UnityEngine.Random.Range(-0.2f, 0.2f);
             direction = direction.normalized;
 
         }

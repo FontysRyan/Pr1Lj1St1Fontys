@@ -38,7 +38,7 @@ public class PlayerController : MonoBehaviour
 
     private void ApplyMovement()
     {
-        Vector2 newPosition = rb.position + Vector2.up * moveInput * speed * Time.fixedDeltaTime; // Calculate new position based on input and speed
+        Vector2 newPosition = rb.position + Vector2.up * moveInput * speed * Time.fixedDeltaTime; // Calculate new position based on input and speed (aanpassen)
         newPosition.y = Mathf.Clamp(newPosition.y, -maxTransformPostionY, maxTransformPostionY); // dont go out of bounds
         rb.MovePosition(newPosition);
     }
