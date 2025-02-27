@@ -1,6 +1,7 @@
 using UnityEngine;
 using TMPro;
 using System;
+using UnityEngine.UI;
 
 [System.Serializable]
 public enum ScoreType { Player, Bot }
@@ -9,10 +10,20 @@ public class ScoreSystem : MonoBehaviour
 {
     public static ScoreSystem Instance { get; private set; }  // Singleton instance
 
+    [Header("Score Settings")]
     [SerializeField] private int maxScore = 2;
     [SerializeField] private int maxReceivedScore = 1;
+    [Header("Score UI")]
     [SerializeField] private TextMeshProUGUI playerScoreText;
     [SerializeField] private TextMeshProUGUI botScoreText;
+    [SerializeField] private TextMeshProUGUI stylingText;
+    [SerializeField] private TextMeshProUGUI botNameText;
+    [SerializeField] private TextMeshProUGUI playerNameText;
+    [Header("Win/Lose UI")]
+    [SerializeField] private TextMeshProUGUI winText;
+    [SerializeField] private TextMeshProUGUI loseText;
+    [SerializeField] private Button RetryButton;
+
 
     private int scorePlayer = 0;
     private int scoreBot = 0;
@@ -70,6 +81,22 @@ public class ScoreSystem : MonoBehaviour
     private void HandleWin(ScoreType winner)
     {
         Debug.Log($"{winner} wins!");
+        DisablePlayingField();
+        if (winner == ScoreType.Bot)
+        {
+            loseText.gameObject.SetActive(true);
+        }
+        else
+        {
+            winText.gameObject.SetActive(true);
+        }
+        RetryButton.gameObject.SetActive(true);
+        ResetScores();
+    }
+
+    private void StartGame()
+    {
+        EnablePlayingField();
         ResetScores();
     }
 
@@ -85,4 +112,50 @@ public class ScoreSystem : MonoBehaviour
         if (playerScoreText) playerScoreText.text = scorePlayer.ToString();
         if (botScoreText) botScoreText.text = scoreBot.ToString();
     }
+
+    private void DisablePlayingField()
+    {
+        playerScoreText.gameObject.SetActive(false);
+        botScoreText.gameObject.SetActive(false);
+        stylingText.gameObject.SetActive(false);
+        botNameText.gameObject.SetActive(false);
+        playerNameText.gameObject.SetActive(false);
+
+        GameObject ball = GameObject.FindWithTag("Ball");
+        GameObject[] paddles = GameObject.FindGameObjectsWithTag("Paddle");
+
+        if (ball != null) ball.SetActive(false);
+        foreach (GameObject paddle in paddles)
+        {
+            if (paddle != null) paddle.SetActive(false);
+        }
+    }
+
+    public void EnablePlayingField()
+    {
+        playerScoreText.gameObject.SetActive(true);
+        botScoreText.gameObject.SetActive(true);
+        stylingText.gameObject.SetActive(true);
+        botNameText.gameObject.SetActive(true);
+        playerNameText.gameObject.SetActive(true);
+        
+        
+        winText.gameObject.SetActive(false);
+        loseText.gameObject.SetActive(false);
+        RetryButton.gameObject.SetActive(false);
+
+
+        GameObject ball = GameObject.FindWithTag("Ball");
+        GameObject[] paddles = GameObject.FindGameObjectsWithTag("Paddle");
+
+        if (ball != null) ball.SetActive(true);
+        foreach (GameObject paddle in paddles)
+        {
+            if (paddle != null) paddle.SetActive(true);
+        }
+
+    }
+
+
+
 }

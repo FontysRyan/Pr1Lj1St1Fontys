@@ -32,7 +32,7 @@ public class BotController : MonoBehaviour
 
     private void InitializePosition()
     {
-        startPosition = transform.position;
+        rb.position = startPosition; // Set the Rigidbody2D's position to the start position
     }
 
     private void Move(float moveInput)

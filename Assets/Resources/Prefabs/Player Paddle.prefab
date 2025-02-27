@@ -106,7 +106,9 @@ MonoBehaviour:
   rb: {fileID: 6965207245382641421}
   boxCollider: {fileID: 4672639950118013322}
   inputAxis: Vertical
-  speed: 20
+  speed: 10
+  startPosition: {x: -8.5, y: 0, z: 0}
+  moveInput: 0
 --- !u!61 &4672639950118013322
 BoxCollider2D:
   m_ObjectHideFlags: 0
