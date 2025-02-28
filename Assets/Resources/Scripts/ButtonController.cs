@@ -18,16 +18,12 @@ public class ButtonController : MonoBehaviour
         }
     }
 
+    private void resetGame()
+    {
+        UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
+    }
     public void RetryGame()
     {
-        // Check if ScoreSystem instance exists before calling
-        if (ScoreSystem.Instance != null)
-        {
-            ScoreSystem.Instance.EnablePlayingField();
-        }
-        else
-        {
-            Debug.LogError("ScoreSystem instance not found!");
-        }
+        resetGame();
     }
 }

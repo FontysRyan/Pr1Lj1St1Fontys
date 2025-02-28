@@ -28,8 +28,13 @@ public class ScoreSystem : MonoBehaviour
     private int scorePlayer = 0;
     private int scoreBot = 0;
 
+    private GameObject ball;
+    private GameObject[] paddles;
+
     private void Awake()
     {
+        ball = GameObject.FindWithTag("Ball");
+        paddles = GameObject.FindGameObjectsWithTag("Paddle");
         // Singleton setup to prevent duplicates
         if (Instance == null)
             Instance = this;
@@ -80,6 +85,7 @@ public class ScoreSystem : MonoBehaviour
 
     private void HandleWin(ScoreType winner)
     {
+        ball.GetComponent<BallController>().ResetBallPosition();
         Debug.Log($"{winner} wins!");
         DisablePlayingField();
         if (winner == ScoreType.Bot)
@@ -91,22 +97,7 @@ public class ScoreSystem : MonoBehaviour
             winText.gameObject.SetActive(true);
         }
         RetryButton.gameObject.SetActive(true);
-        ResetScores();
     }
-
-    private void StartGame()
-    {
-        EnablePlayingField();
-        ResetScores();
-    }
-
-    private void ResetScores()
-    {
-        scorePlayer = 0;
-        scoreBot = 0;
-        UpdateScoreUI();
-    }
-
     private void UpdateScoreUI()
     {
         if (playerScoreText) playerScoreText.text = scorePlayer.ToString();
@@ -121,8 +112,7 @@ public class ScoreSystem : MonoBehaviour
         botNameText.gameObject.SetActive(false);
         playerNameText.gameObject.SetActive(false);
 
-        GameObject ball = GameObject.FindWithTag("Ball");
-        GameObject[] paddles = GameObject.FindGameObjectsWithTag("Paddle");
+
 
         if (ball != null) ball.SetActive(false);
         foreach (GameObject paddle in paddles)
@@ -131,30 +121,7 @@ public class ScoreSystem : MonoBehaviour
         }
     }
 
-    public void EnablePlayingField()
-    {
-        playerScoreText.gameObject.SetActive(true);
-        botScoreText.gameObject.SetActive(true);
-        stylingText.gameObject.SetActive(true);
-        botNameText.gameObject.SetActive(true);
-        playerNameText.gameObject.SetActive(true);
-        
-        
-        winText.gameObject.SetActive(false);
-        loseText.gameObject.SetActive(false);
-        RetryButton.gameObject.SetActive(false);
 
-
-        GameObject ball = GameObject.FindWithTag("Ball");
-        GameObject[] paddles = GameObject.FindGameObjectsWithTag("Paddle");
-
-        if (ball != null) ball.SetActive(true);
-        foreach (GameObject paddle in paddles)
-        {
-            if (paddle != null) paddle.SetActive(true);
-        }
-
-    }
 
 
 
