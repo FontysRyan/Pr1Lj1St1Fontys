@@ -31,15 +31,16 @@ public class BallController : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Wall"))
-        {
-            ReflectBall(collision);
-        }
-        else if (collision.gameObject.CompareTag("Paddle"))
+
+        if (collision.gameObject.CompareTag("Paddle"))
         {
             ReflectBall(collision);
             AdjustBounce();
             IncreaseSpeed();
+        }
+        else if (collision.gameObject.CompareTag("Wall"))
+        {
+            ReflectBall(collision);
         }
         else if (collision.gameObject.CompareTag("Goal Player"))
         {
